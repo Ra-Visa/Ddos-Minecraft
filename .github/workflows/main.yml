@@ -1,21 +1,34 @@
-name: Build APK
-on: [push, pull_request]
+name: Build Ghost DDOS APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       - name: Build with Buildozer
-        # This is the updated, official path
-        uses: kivy/buildozer-action@master
+        # ការប្រើ Version Tag ជាក់លាក់ ដើម្បីជៀសវាង error "repository not found"
+        uses: kivy/buildozer-action@v1.2.1
         with:
           workdir: .
           buildozer_version: master
 
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: GhostApp-APK
+          name: Ghost-DDOS-APK-${{ steps.get-date.outputs.date }}
           path: bin/*.apk
+          
