@@ -1,10 +1,10 @@
-name: Build Ghost DDOS APK
+name: Build APK
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -12,18 +12,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        [span_5](start_span)uses: actions/checkout@v4[span_5](end_span)
+        uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        # ប្រើប្រាស់សេវាកម្មផ្លូវការរបស់ Kivy ជាមួយ Version ជាក់លាក់បំផុត
-        [span_6](start_span)[span_7](start_span)uses: kivy/buildozer-action@v1.5.0[span_6](end_span)[span_7](end_span)
+        # ប្រើប្រាស់ Kivy Buildozer Action ផ្លូវការ
+        uses: kivy/buildozer-action@master
         with:
           workdir: .
           buildozer_version: master
 
-      - name: Upload APK Artifact
-        [span_8](start_span)uses: actions/upload-artifact@v4[span_8](end_span)
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: Ghost-DDOS-APK
-          [span_9](start_span)path: bin/*.apk[span_9](end_span)
-          
+          path: bin/*.apk
