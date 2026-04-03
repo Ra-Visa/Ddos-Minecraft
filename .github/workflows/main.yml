@@ -1,0 +1,21 @@
+name: Build APK
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build with Buildozer
+        # This is the updated, official path
+        uses: kivy/buildozer-action@master
+        with:
+          workdir: .
+          buildozer_version: master
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GhostApp-APK
+          path: bin/*.apk
