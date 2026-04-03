@@ -3,8 +3,6 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
@@ -15,8 +13,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        # ប្រើប្រាស់ Kivy Buildozer Action ផ្លូវការ
-        uses: kivy/buildozer-action@master
+        # ប្តូរមកប្រើ Version នេះវិញ (ធានាថាមានក្នុង GitHub)
+        uses: ArtemGr/buildozer-action@v1.6.1
         with:
           workdir: .
           buildozer_version: master
