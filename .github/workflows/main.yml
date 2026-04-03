@@ -12,23 +12,18 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        [span_5](start_span)uses: actions/checkout@v4[span_5](end_span)
 
       - name: Build with Buildozer
-        # ការប្រើ Version Tag ជាក់លាក់ ដើម្បីជៀសវាង error "repository not found"
-        uses: kivy/buildozer-action@v1.2.1
+        # ប្រើប្រាស់សេវាកម្មផ្លូវការរបស់ Kivy ជាមួយ Version ជាក់លាក់បំផុត
+        [span_6](start_span)[span_7](start_span)uses: kivy/buildozer-action@v1.5.0[span_6](end_span)[span_7](end_span)
         with:
           workdir: .
           buildozer_version: master
 
       - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
+        [span_8](start_span)uses: actions/upload-artifact@v4[span_8](end_span)
         with:
-          name: Ghost-DDOS-APK-${{ steps.get-date.outputs.date }}
-          path: bin/*.apk
+          name: Ghost-DDOS-APK
+          [span_9](start_span)path: bin/*.apk[span_9](end_span)
           
