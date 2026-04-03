@@ -13,8 +13,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        # ប្រើ ArtemGr ជាមួយ branch master
-        uses: ArtemGr/buildozer-action@master
+        # ត្រូវតែប្រើ ArtemGr (អក្សរ A និង G ជាអក្សរធំ)
+        uses: ArtemGr/buildozer-action@v1.6.1
         with:
           workdir: .
           buildozer_version: master
