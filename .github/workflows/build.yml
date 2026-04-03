@@ -1,0 +1,22 @@
+name: Build-Ghost-APK
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build with Buildozer
+        uses: ArtemGr/buildozer-action@v1
+        with:
+          buildozer_version: master
+          # ប្រើ "yes |" ដើម្បីឆ្លើយ 'y' ជំនួសបងដោយអូតូ
+          command: yes | buildozer -v android debug
+          repository_root: .
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: Ghost-DDoS-VIP-Final
+          path: bin/*.apk
