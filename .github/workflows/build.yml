@@ -6,19 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4 # Update ទៅ v4 (ថ្មីបំផុត)
+        uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        uses: ArtemGr/buildozer-action@v1.6.1 # បញ្ជាក់ Version ឱ្យច្បាស់
+        # ប្ដូរមកប្រើ Action នេះវិញ ព្រោះវា Update ជាង និងមិន Error
+        uses: jreleaser/buildozer-action@v1
         with:
-          buildozer_version: master
-          # ប្រើ "yes |" ដើម្បីឆ្លើយ 'y' ជំនួសបងដោយអូតូ
           command: yes | buildozer -v android debug
           repository_root: .
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4 # FIXED: Update ពី v2 ទៅ v4
+        uses: actions/upload-artifact@v4 # Update ទៅ v4 តាមការណែនាំរបស់ GitHub
         with:
           name: Ghost-DDoS-VIP-Final
           path: bin/*.apk
-          
